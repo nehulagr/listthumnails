@@ -1,0 +1,113 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Onsen UI Themes</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="./lib/font_awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/onsen-css-components-default.css">
+    <link rel="stylesheet" href="css/list_thumbnails.css">
+    <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+    <style type="text/css">
+    .list-item-left{
+      -webkit-border-radius: 8px;
+      -moz-border-radius: 8px;
+      border-radius: 8px;
+      width: 80px;
+      height:80px;
+    }
+
+    </style>
+    <script type="text/javascript">
+      function init(){
+        $.getJSON('http://www.foduu.com/?json=get_recent_post&callback=?', function(data){
+
+            console.log(data);
+            ListViewData(data);
+        });
+      }
+      function ListViewData(allpost){
+      allposts = allpost;
+      $.each(allpost.posts, function(i,row){
+        if(row.thumbnail_images){
+                $(".list__container").append('<li class="list__item list__item--tappable list__item__line-height list-item-container">'+
+                                              '<div class="list-item-main">'+
+                                                '<div class="list-item-left">'+
+                                                  '<img src="'+row.thumbnail_images['full'].url+'" class="thumbnail" width="80" height="80">'+
+                                               '</div>'+
+                                                '<div class="list-item-right">'+
+                                                  '<div class="list-item-content">'+
+                                                    '<span class="list-item-name">'+row.title+' &nbsp; '+
+                                                    '<br/>'+
+                                                    '<span class="lucent">'+
+                                                    '<i class="fa fa-map-marker"></i>&nbsp; Paris, France'+
+                                                    '</span>'+
+                                                    '</span>'+
+                                                    '<br/>'+
+                                                    '<span class="list-item-text" style="margin-top:16px;">Eiffel Tower is the symbol of Paris and named by Gustave Eiffel.'+
+                                                    '</span>'+
+                                                  '</div>'+
+                                                '</div>'+
+                                              '</div>'+
+                                              '<span class="list-item-action" >'+
+                                              '<i class="fa fa-angle-right"></i>'+
+                                              '</span>'+
+                                            '</li>');
+
+
+        }
+        else{
+
+                $(".list__container").append('<li class="list__item list__item--tappable list__item__line-height list-item-container">'+
+                                              '<div class="list-item-main">'+
+                                                '<div class="list-item-left">'+
+                                                  '<img src="http://placehold.it/80x80" class="thumbnail" width="80" height="80">'+
+                                               '</div>'+
+                                                '<div class="list-item-right">'+
+                                                  '<div class="list-item-content">'+
+                                                    '<span class="list-item-name">'+row.title+' &nbsp; '+
+                                                    '<br/>'+
+                                                    '<span class="lucent">'+
+                                                    '<i class="fa fa-map-marker"></i>&nbsp; Paris, France'+
+                                                    '</span>'+
+                                                    '</span>'+
+                                                    '<br/>'+
+                                                    '<span class="list-item-text" style="margin-top:16px;">Eiffel Tower is the symbol of Paris and named by Gustave Eiffel.'+
+                                                    '</span>'+
+                                                  '</div>'+
+                                                '</div>'+
+                                              '</div>'+
+                                              '<span class="list-item-action" >'+
+                                              '<i class="fa fa-angle-right"></i>'+
+                                              '</span>'+
+                                            '</li>');
+
+        }
+          $(".list__container").listview();
+
+        });
+       // $("html,body").animate({
+         // scrollTop: $('.list__container').prop("scrollHeight")
+        //}, 500);
+
+      }
+
+    </script>
+
+  </head>
+  <body ontouchstart="" class="page scroller" onload="init()">
+    <div class="navigation-bar">
+      <div class="navigation-bar__left">&nbsp; </div>
+      <div class="navigation-bar__center">
+        <span class="navigation-bar__title navigation-bar__line-height">List with Pictures
+        </span>
+      </div>
+      <div class="navigation-bar__right">&nbsp; </div>
+    </div>
+    <div class="list list-top">
+      <ul class="list__container">
+        
+      </ul>
+    </div>
+  </body>
+</html>
